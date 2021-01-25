@@ -1,5 +1,6 @@
 package br.com.devpleno.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,10 @@ public class ProdutoService {
 		Optional<Produto> obj = repo.findById(id);
 		return obj.orElseThrow(() -> new ObjectNotFoundException(
 				"Objeto não encontrado Id: " + id + " Tipo: " + Produto.class.getName()));
+	}
+	
+	public List<Produto> findAll() {
+		return repo.findAll();
 	}
 
 }
