@@ -6,7 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.com.devpleno.domain.Categoria;
+import br.com.devpleno.domain.Produto;
 import br.com.devpleno.repositories.CategoriaRepository;
+import br.com.devpleno.repositories.ProdutoRepository;
 
 @Service
 public class DBService {
@@ -14,10 +16,27 @@ public class DBService {
 	@Autowired
 	private CategoriaRepository categoriaRepository;
 	
+	@Autowired
+	private ProdutoRepository produtoRepository;
+	
 	public void initializeTestDatabase() {
 		Categoria categoria1 = new Categoria(null, "Informática");
 		Categoria categoria2 = new Categoria(null, "Escritório");
+		
+		Produto produto1 = new Produto(null, "Computador", 2000.00);
+		Produto produto2 = new Produto(null, "Impressora", 800.00);
+		Produto produto3 = new Produto(null, "Mouse", 80.00);
+		
+		categoria1.getProdutos().addAll(Arrays.asList(produto1, produto3));
+		
+		produto1.getCategorias().add(categoria1);
+		produto2.getCategorias().add(categoria2);
+		produto3.getCategorias().add(categoria1);
+		
+		
 		categoriaRepository.saveAll(Arrays.asList(categoria1, categoria2));
+		produtoRepository.saveAll(Arrays.asList(produto1, produto2, produto3));
+		
 		
 	}
 
