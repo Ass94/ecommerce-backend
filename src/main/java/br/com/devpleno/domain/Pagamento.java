@@ -8,7 +8,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.OneToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
 import br.com.devpleno.enums.EstadoPagamento;
@@ -25,9 +27,14 @@ public class Pagamento implements Serializable {
 	private Integer id;
 	private Integer estado;
 
-	public Pagamento(Integer id, EstadoPagamento estado) {
+	@JsonIgnore
+	@OneToOne(mappedBy = "pagamento")
+	private Pedido pedido;
+
+	public Pagamento(Integer id, EstadoPagamento estado, Pedido pedido) {
 		this.id = id;
 		this.estado = (estado == null) ? null : estado.getCodigo();
+		this.pedido = pedido;
 	}
 
 	public Integer getId() {
@@ -44,6 +51,14 @@ public class Pagamento implements Serializable {
 
 	public void setEstado(EstadoPagamento estado) {
 		this.estado = estado.getCodigo();
+	}
+
+	public Pedido getPedido() {
+		return pedido;
+	}
+
+	public void setPedido(Pedido pedido) {
+		this.pedido = pedido;
 	}
 
 	@Override
