@@ -19,11 +19,14 @@ public enum EstadoPagamento {
 	public String getDescricao() {
 		return descricao;
 	}
-	
+
 	public static EstadoPagamento toEnum(Integer codigo) {
-		if(codigo == null) return null;
-		for(EstadoPagamento p : EstadoPagamento.values()) {
-			return p;
+		if (codigo == null)
+			return null;
+		for (EstadoPagamento p : EstadoPagamento.values()) {
+			if (codigo.equals(p.getCodigo())) {
+				return p;
+			}
 		}
 		throw new IllegalArgumentException("Código inválido " + codigo);
 	}

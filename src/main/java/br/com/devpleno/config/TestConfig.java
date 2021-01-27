@@ -1,5 +1,7 @@
 package br.com.devpleno.config;
 
+import java.text.ParseException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -15,7 +17,7 @@ public class TestConfig {
 	private DBService service;
 	
 	@Bean
-	public boolean initializate() {
+	public boolean initializate() throws ParseException {
 		service.initializeTestDatabase();
 		return true;
 	}

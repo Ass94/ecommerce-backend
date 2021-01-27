@@ -8,6 +8,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.JoinColumn;
+import javax.persistence.MapsId;
 import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -18,7 +20,7 @@ import br.com.devpleno.enums.EstadoPagamento;
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "@type")
-public class Pagamento implements Serializable {
+public abstract class Pagamento implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
@@ -28,8 +30,14 @@ public class Pagamento implements Serializable {
 	private Integer estado;
 
 	@JsonIgnore
-	@OneToOne(mappedBy = "pagamento")
+	@OneToOne
+	@JoinColumn(name = "pedido_id")
+	@MapsId
 	private Pedido pedido;
+	
+	public Pagamento() {
+		
+	}
 
 	public Pagamento(Integer id, EstadoPagamento estado, Pedido pedido) {
 		this.id = id;

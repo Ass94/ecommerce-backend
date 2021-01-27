@@ -17,6 +17,10 @@ public class PagamentoComBoleto extends Pagamento {
 
 	private Date dataPagamento;
 	private Date dataVencimento;
+	
+	public PagamentoComBoleto() {
+		
+	}
 
 	public PagamentoComBoleto(Integer id, EstadoPagamento estado, Pedido pedido, Date dataPagamento, Date dataVencimento) {
 		super(id, estado, pedido);
