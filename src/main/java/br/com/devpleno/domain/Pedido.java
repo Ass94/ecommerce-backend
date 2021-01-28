@@ -32,22 +32,30 @@ public class Pedido implements Serializable {
 	@JoinColumn(name = "endereco_de_entrega_id")
 	private Endereco enderecoDeEntrega;
 
+	@OneToMany(mappedBy = "id.pedido")
+	private Set<ItemPedido> itens = new HashSet<>();
+
 	@ManyToOne
 	@JoinColumn(name = "cliente_id")
 	private Cliente cliente;
-
-	@OneToMany(mappedBy = "id.pedido")
-	private Set<ItemPedido> itens = new HashSet<>();
 
 	public Pedido() {
 
 	}
 
-	public Pedido(Integer id, Date instante, Endereco enderecoDeEntrega, Cliente cliente) {
+	public Pedido(Integer id, Date instante, Cliente cliente, Endereco enderecoDeEntrega) {
 		this.id = id;
 		this.instante = instante;
-		this.enderecoDeEntrega = enderecoDeEntrega;
 		this.cliente = cliente;
+		this.enderecoDeEntrega = enderecoDeEntrega;
+	}
+	
+	public Double getTotal() {
+		double soma = 0.0;
+		for(ItemPedido ip : itens) {
+			soma += ip.getSubtotal();
+		}
+		return soma;
 	}
 
 	public Integer getId() {
@@ -74,20 +82,20 @@ public class Pedido implements Serializable {
 		this.pagamento = pagamento;
 	}
 
-	public Endereco getEnderecoDeEntrega() {
-		return enderecoDeEntrega;
-	}
-
-	public void setEnderecoDeEntrega(Endereco enderecoDeEntrega) {
-		this.enderecoDeEntrega = enderecoDeEntrega;
-	}
-
 	public Cliente getCliente() {
 		return cliente;
 	}
 
 	public void setCliente(Cliente cliente) {
 		this.cliente = cliente;
+	}
+
+	public Endereco getEnderecoDeEntrega() {
+		return enderecoDeEntrega;
+	}
+
+	public void setEnderecoDeEntrega(Endereco enderecoDeEntrega) {
+		this.enderecoDeEntrega = enderecoDeEntrega;
 	}
 
 	public Set<ItemPedido> getItens() {

@@ -1,4 +1,4 @@
-package br.com.devpleno.enums;
+package br.com.devpleno.domain.enums;
 
 public enum TipoCliente {
 

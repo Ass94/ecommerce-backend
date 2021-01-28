@@ -18,8 +18,8 @@ import br.com.devpleno.domain.PagamentoComBoleto;
 import br.com.devpleno.domain.PagamentoComCartao;
 import br.com.devpleno.domain.Pedido;
 import br.com.devpleno.domain.Produto;
-import br.com.devpleno.enums.EstadoPagamento;
-import br.com.devpleno.enums.TipoCliente;
+import br.com.devpleno.domain.enums.EstadoPagamento;
+import br.com.devpleno.domain.enums.TipoCliente;
 import br.com.devpleno.repositories.CategoriaRepository;
 import br.com.devpleno.repositories.CidadeRepository;
 import br.com.devpleno.repositories.ClienteRepository;
@@ -96,8 +96,8 @@ public class DBService {
 
 		SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy HH:mm");
 
-		Pedido pedido1 = new Pedido(null, df.parse("27/01/2021 10:00"), endereco1, cliente1);
-		Pedido pedido2 = new Pedido(null, df.parse("27/01/2021 10:00"), endereco3, cliente2);
+		Pedido pedido1 = new Pedido(null, df.parse("27/01/2021 10:00"), cliente1, endereco1);
+		Pedido pedido2 = new Pedido(null, df.parse("27/01/2021 10:00"), cliente2, endereco3);
 		
 		ItemPedido item1 = new ItemPedido(pedido1, produto1, 0.00, 1, 2000.00);
 		ItemPedido item2 = new ItemPedido(pedido1, produto3, 0.00, 2, 80.00);
