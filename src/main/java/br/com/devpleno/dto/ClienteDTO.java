@@ -2,14 +2,27 @@ package br.com.devpleno.dto;
 
 import java.io.Serializable;
 
-import br.com.devpleno.domain.Cliente;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
 
+import org.hibernate.validator.constraints.Length;
+
+import br.com.devpleno.domain.Cliente;
+import br.com.devpleno.service.validation.ClienteUpdate;
+
+@ClienteUpdate
 public class ClienteDTO implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
 	private Integer id;
+	
+	@NotEmpty(message = "Preenchimento obrigatório")
+	@Length(min = 5, max = 80, message = "O tamanho deve ser entre 5 a 80 caracteres")
 	private String nome;
+	
+	@NotEmpty(message = "Preenchimento obrigatório")
+	@Email
 	private String email;
 
 	public ClienteDTO() {
